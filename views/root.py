@@ -45,41 +45,40 @@ def webhook():
 def get_departure_iata_code(req):
 	"""Retrieve the departure airport IATA code based on the city entered by the user."""
 
-	result = req.get("result")
+    result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("departure-city")
 
 	try:
-		r = requests.get('https://api-test.lufthansa.com/airports.json')
+	  r = requests.get('https://api-test.lufthansa.com/airports.json')
 	except Exception  as e:
-		print(e, type(e))
+	  print(e, type(e))
 	
 	for attrs in r.json()['city']:
-		if attrs['city'] == city:			
-			departure_iata = attrs['code']
-			break
-		else:
-			print('Nothing found!')
+	    if attrs['city'] == city:			
+	    departure_iata = attrs['code']
+	    break
+	else:
+	    print('Nothing found!')
 	
 	return departure_iata
 	
 def get_arrival_iata_code(req):
 	"""Retrieve the arrival airport IATA code based on the city entered by the user."""
 
-	result = req.get("result")
+    result = req.get("result")
     parameters = result.get("parameters")
     city = parameters.get("arrival-city")
 	try:
-		r = requests.get('https://api-test.lufthansa.com/airports.json')
-	except Exception  as e:
-	print(e, type(e))
+	  r = requests.get('https://api-test.lufthansa.com/airports.json')
+	  except Exception  as e:
+	  print(e, type(e))
 		
 	for attrs in r.json()['city']:
-		if attrs['city'] == city:			
-			arrival_iata = attrs['code']
-			break
+		if attrs['city'] == city: arrival_iata = attrs['code']
+		  break
 		else:
-			print('Nothing found!')
+		  print('Nothing found!')
 	
 	return arrival_iata	
 	
@@ -92,15 +91,14 @@ def process_request(req):
     best_fares_query = make_lufthansa_best_fares_query(req)
     if best_fares_query is None:
         return {}
-
-	else:		
-		login()		
-		best_fares_url = baseurl + urllib.urlencode({'q': best_fares_query}) + "&format=json"
-		result = urllib.urlopen(best_fares_url).read()
-		data = json.loads(result)
-		res = make_webhook_result(data)
+     else:		
+      login()		
+      best_fares_url = baseurl + urllib.urlencode({'q': best_fares_query}) + "&format=json"
+      result = urllib.urlopen(best_fares_url).read()
+      data = json.loads(result)
+      res = make_webhook_result(data)
 		
-	return res
+     return res
 
 def make_lufthansa_best_fares_query(req):
 	"""the method returns the query used by Luftansa API to return the information searched for"""
@@ -108,33 +106,36 @@ def make_lufthansa_best_fares_query(req):
 	parameters = result.get("parameters")		
 	travel-date = parameters.get("travel-date")
 	
-	if travel-date is None:
-        return None
+	if travel-date is None: return None
 	
 	origin = get_departure_iata_code(req)
 	if origin is None:
-        return None
+           return None
 		
 	cabinclass = parameters.get("cabinclasscode")
-    if cabinclass is None:
-        return None
+    
+        if cabinclass is None:
+            return None
 	
 	trip_duration_info = parameters.get("trip-duration") 
 	trip_duration = trip_duration_info["amount"]
+	
 	if trip_duration is None:
-        return None
+           return None
 		
 	destination = get_arrival_iata_code(req)
+	
 	if destination is None:
-        return None
+           return None
 	
 	range = parameters.get("best-fares-range")
+	
 	if range is None:
-        return None
+           return None
 		
 	#Example of query required: fares/bestfares?catalogues=LH&travel-date=2016-12-29&origin=FRA&cabin-class=economy&trip-duration=5&country=DE&destination=JNB&range=byday	
 	query = "fares/bestfares?catalogues=LH&travel-date=" + travel-date + "&origin=" + origin + "&cabin-class=" + cabinclass + "&trip-duration=" + str(trip_duration) + "&country=DE&destination=" + destination + "&range=" + range	
-	return query
+	   return query
 	
 @app.route('/webook/login', methods = [ 'GET', 'POST' ])
 def login():
@@ -209,22 +210,22 @@ def make_webhook_result(data):
 		
 		count = 1
 		for infos_total_price in json()["BestFaresResponse"]:
-			for single_offer_total_price["TotalPrice"]["DetailCurrencyPrice"]["Total"] in infos_total_price["AirShoppingRS"]["OffersGroup"]["AirlineOffers"]["AirlineOffer"]:
-				speech += "\n Offer # " + str(count) + " :" + single_offer_total_price["TotalPrice"]["DetailCurrencyPrice"]["Total"].get("#text") + " EUR"  
-				count += 1
+		   for single_offer_total_price["TotalPrice"]["DetailCurrencyPrice"]["Total"] in infos_total_price["AirShoppingRS"]["OffersGroup"]["AirlineOffers"]["AirlineOffer"]:
+		       speech += "\n Offer # " + str(count) + " :" + single_offer_total_price["TotalPrice"]["DetailCurrencyPrice"]["Total"].get("#text") + " EUR"  
+		       count += 1
 		
 		speech  += "\nFLIGHT SEGMENTS LIST FOR ALL OFFERS:  "
 		
 		for flight_segments in json()["BestFaresResponse"]:
-			for departure_info["Departure"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
-			for arrival_info["Arrival"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
-			for marketing_carrier_info["MarketingCarrier"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
+		    for departure_info["Departure"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
+		    for arrival_info["Arrival"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
+		    for marketing_carrier_info["MarketingCarrier"] in flight_segments["AirShoppingRS"]["DataLists"]["FlightSegmentList"]["FlightSegment"]:
 				
-				speech += "\n\nDEPARTURE DATE: " + departure_info["Departure"].get("Date")
-				speech += "\nDEPARTURE AIRPORT CODE:   " +  departure_info["Departure"].get("AirportCode")
-				speech += "\nARRIVAL AIRPORT CODE:   " + arrival_info["Arrival"].get("AirportCode")
-				speech += "\nAIRLINE CARRIER ID: " +  marketing_carrier_info["MarketingCarrier"].get("AirlineID")
-				speech += "\nFLIGHT NUMBER: " +  marketing_carrier_info["MarketingCarrier"].get("FlightNumber")
+		      speech += "\n\nDEPARTURE DATE: " + departure_info["Departure"].get("Date")
+		      speech += "\nDEPARTURE AIRPORT CODE:   " +  departure_info["Departure"].get("AirportCode")
+		      speech += "\nARRIVAL AIRPORT CODE:   " + arrival_info["Arrival"].get("AirportCode")
+		      speech += "\nAIRLINE CARRIER ID: " +  marketing_carrier_info["MarketingCarrier"].get("AirlineID")
+		      speech += "\nFLIGHT NUMBER: " +  marketing_carrier_info["MarketingCarrier"].get("FlightNumber")
 
     #print("Response:")
     print(speech)
