@@ -1,0 +1,25 @@
+{
+  "id": "5c5ccd83-5679-40b7-8fa6-35206d8bba2b",
+  "name": "range",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "byday",
+      "synonyms": [
+        "per day",
+        "day",
+        "days"
+      ]
+    },
+    {
+      "value": "bymonth",
+      "synonyms": [
+        "per month",
+        "month",
+        "months"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}
