@@ -1,0 +1,269 @@
+{
+  "templates": [
+    "@sys.duration:duration ",
+    "per months",
+    "per month",
+    "per days",
+    "@range:range ",
+    "What are the best fares between @sys.geo-city:departure-city and @sys.geo-city:arrival-city ",
+    "What is the best fare from @sys.geo-city:departure-city to @sys.geo-city:arrival-city ?",
+    "I want to go from @sys.geo-city:departure-city to @sys.geo-city:arrival-city ",
+    "I want to travel in Economy",
+    "for @sys.duration:duration "
+  ],
+  "userSays": [
+    {
+      "id": "7b46c93a-35b7-4f93-a7a2-38f8af0e8465",
+      "data": [
+        {
+          "text": "1 day",
+          "alias": "duration",
+          "meta": "@sys.duration",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "5b8c6990-18fc-404a-8886-7fcf1d29b32d",
+      "data": [
+        {
+          "text": "per months"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "0c3d1928-910c-452c-9cb7-1c3d5fcafbbe",
+      "data": [
+        {
+          "text": "per month"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "50d443bd-8f35-4f7b-a854-0127b35c687b",
+      "data": [
+        {
+          "text": "per days"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "fa89c0b7-4315-4cd6-9b10-ce4d2534d157",
+      "data": [
+        {
+          "text": "per day",
+          "alias": "range",
+          "meta": "@range",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "0be44203-05f8-4e4a-9fae-dd78150bc85b",
+      "data": [
+        {
+          "text": "What are the best fares between "
+        },
+        {
+          "text": "Moscow",
+          "alias": "departure-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "Chicago",
+          "alias": "arrival-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "05c71a35-0f5d-4993-a048-0b3b2edf89cb",
+      "data": [
+        {
+          "text": "What is the best fare from "
+        },
+        {
+          "text": "Paris",
+          "alias": "departure-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " to "
+        },
+        {
+          "text": "London",
+          "alias": "arrival-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " ?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "3255f520-3040-4e0d-bed0-a162d79c0a61",
+      "data": [
+        {
+          "text": "I want to go from "
+        },
+        {
+          "text": "Berlin",
+          "alias": "departure-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " to "
+        },
+        {
+          "text": "Munich",
+          "alias": "arrival-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "b6b2b78e-f2cb-4190-8f4e-b1b9d021f65f",
+      "data": [
+        {
+          "text": "I want to travel in "
+        },
+        {
+          "text": "Economy",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "542b8ade-d6f4-4761-9b36-a4079853ea33",
+      "data": [
+        {
+          "text": "for "
+        },
+        {
+          "text": "5 days",
+          "alias": "duration",
+          "meta": "@sys.duration",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "a118b775-704f-4f48-bfc1-cb866fbea8a3",
+  "name": "Lufthansa best fares",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "search.bestfares",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "departure-city",
+          "value": "$departure-city",
+          "prompts": [],
+          "defaultValue": "Please enter the city you will depart from (Example: \"Munich\")",
+          "isList": false
+        },
+        {
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "arrival-city",
+          "value": "$arrival-city",
+          "prompts": [],
+          "defaultValue": "Please enter the city you will travel to (Example: New Dehli)",
+          "isList": false
+        },
+        {
+          "required": true,
+          "dataType": "@sys.date",
+          "name": "travel-date",
+          "value": "@sys.date",
+          "prompts": [
+            "Please enter your traveling date in ISO-8601 format.    Example: 2022-12-31"
+          ],
+          "isList": false
+        },
+        {
+          "required": true,
+          "dataType": "@sys.duration",
+          "name": "duration",
+          "value": "$duration",
+          "isList": false
+        },
+        {
+          "required": true,
+          "dataType": "@cabinclasscode",
+          "name": "cabin-class-code",
+          "value": "@cabinclasscode",
+          "prompts": [
+            "Which cabin class code would you like me to consider for your trip  ? Economy ?   Premium Economy ? Business ?  First ?'"
+          ]
+        },
+        {
+          "required": true,
+          "dataType": "@range",
+          "name": "best-fares-range",
+          "value": "@range",
+          "prompts": [
+            "Per day best fares are returned from travel-date till the end of the current month. Per month fares are returned for up to 9 months after travel-date. Do you want to get the Per day best fares or the per month best fares ?"
+          ]
+        },
+        {
+          "dataType": "@range",
+          "name": "range",
+          "value": "$range",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}
