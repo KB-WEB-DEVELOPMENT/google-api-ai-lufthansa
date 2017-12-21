@@ -1,0 +1,38 @@
+{
+  "id": "4a4eafcd-b967-4002-bc93-b198fe594bd4",
+  "name": "cabinclasscode",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "economy",
+      "synonyms": [
+        "economy",
+        "Economy"
+      ]
+    },
+    {
+      "value": "premium_economy",
+      "synonyms": [
+        "premium_economy",
+        "Premium",
+        "Premium Economy"
+      ]
+    },
+    {
+      "value": "business",
+      "synonyms": [
+        "business",
+        "Business"
+      ]
+    },
+    {
+      "value": "first",
+      "synonyms": [
+        "first",
+        "First"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}
