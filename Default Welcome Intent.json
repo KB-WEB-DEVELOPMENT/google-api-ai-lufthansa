@@ -1,0 +1,41 @@
+{
+  "templates": [],
+  "userSays": [],
+  "id": "849b0957-fa66-44d0-83c5-bdc56e8399c6",
+  "name": "Default Welcome Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.welcome",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": "Hi, I can  get you  Lufthansa best fares from any city in the world to any other city in the world ! Let know which city you are traveling from and which city you are going to !"
+        },
+        {
+          "type": 0,
+          "speech": [
+            "Hi!",
+            "Hello!",
+            "Good day!",
+            "Greetings!"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "WELCOME"
+    }
+  ]
+}
