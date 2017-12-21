@@ -1,0 +1,28 @@
+{
+  "templates": [],
+  "userSays": [],
+  "id": "9e1b33df-a0c6-440e-a9e8-3fda21fe89ae",
+  "name": "Default Fallback Intent",
+  "auto": false,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.unknown",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": "Hi, I can  get you  Lufthansa best fares from any city in the world to any other city in the world ! Let know from which aiport to which aiport you are travelling."
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": true,
+  "events": []
+}
