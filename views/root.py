@@ -56,10 +56,10 @@ def get_departure_iata_code(req):
 	
 	for attrs in r.json()['city']:
 	    if attrs['city'] == city:			
-	    departure_iata = attrs['code']
-	    break
-	else:
-	    print('Nothing found!')
+	      departure_iata = attrs['code']
+	      break
+	    else:
+	      print('Nothing found!')
 	
 	return departure_iata
 	
@@ -75,14 +75,13 @@ def get_arrival_iata_code(req):
 	  print(e, type(e))
 		
 	for attrs in r.json()['city']:
-		if attrs['city'] == city: arrival_iata = attrs['code']
-		  break
-		else:
-		  print('Nothing found!')
+	    if attrs['city'] == city: arrival_iata = attrs['code']
+	      break
+	    else:
+	      print('Nothing found!')
 	
 	return arrival_iata	
-	
-	
+		
 def process_request(req):
 	"""method processing the user query, calls various methods within root.py"""
     if req.get("result").get("action") != "search.bestfares":
@@ -243,7 +242,7 @@ def make_webhook_result(data):
                 "template_type": "generic",
                 "elements": {
                         "subtitle": speech,
-						 "image_url": "URL_PATH_TO_LUFTHANSA_LOGO"
+			"image_url": "URL_PATH_TO_LUFTHANSA_LOGO"
                 }              
             }
         }
